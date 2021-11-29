@@ -6,7 +6,7 @@ use App\Http\Controllers\PagesController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\CkeditorController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\SocialShareController;
+use App\Http\Controllers\CommentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,7 +22,11 @@ use App\Http\Controllers\SocialShareController;
 
 Route::get('/',[PagesController::class,'index'])->name('frontend.index');
 Route::get('/post/{id}',[PagesController::class,'single'])->name('frontend.single');
-// Route::get('social-share', [SocialShareController::class, 'index']);
+
+Route::post('/post/{post}',[CommentController::class,'store'])->name('comment.store');
+Route::get('/post/comment/edit/{comment}',[CommentController::class,'edit'])->name('comment.edit');
+Route::post('/post/comment/edit/{comment}',[CommentController::class,'update']);
+Route::get('/post/comment/delete/{comment}', [CommentController::class,'delete']);
 
 Route::group(['middleware' => ['auth']],function(){
     Route::get('/dashboard', function () {

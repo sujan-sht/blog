@@ -1,3 +1,4 @@
+
 @extends('frontend.includes.master')
 @section('title') {{$post->slug}} - {{ config('app.name', 'Laravel') }} @endsection
 @section('content')
@@ -63,30 +64,48 @@
               <div class="all-response">
                 <a class="btn view-all-btn" data-toggle="collapse" href="#collapseExample" role="button"
                   aria-expanded="false" aria-controls="collapseExample">
-                  View all comments ( 3 )
+                  View all comments ( {{$post->comments->count()}} )
                 </a>
               </div>
               <div class="collapse" id="collapseExample">
+                @foreach ($post->comments as $comment)
                 <div class="card comment-card">
                   <div class="card-body">
                     <div class="author-date">
                       <div class="author">
-                        <img src="assets/images/person1.jpg" alt="" class="rounded-circle" />
+                        <img src="{{asset('/image/profileImage/'.$comment->user->image)}}" alt="" class="rounded-circle" />
                       </div>
                       <div class="inner-author-date">
                         <div class="author">
-                          <span class="">Ana Grainger</span>
+                          <span class="">{{$comment->user->name}}</span>
                         </div>
-                        <div class="date"><span>1 Feb, 2019</span></div>
+                        <div class="date"><span>{{date('jS M , Y',strtotime ($comment->updated_at))}}</span></div>
                       </div>
                     </div>
                     <div class="comment-text mt-2">
-                      <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eos quos optio
-                        ab numquam excepturi commodi nam omnis eaque, culpa earum!</p>
+                      <p>{{$comment->comment}}</p>
+                      
                     </div>
+                    @if (Auth::user())
+                    <div class="d-flex justify-content-end">
+                      @if (Auth::user()->id == $comment->user_id)
+                        <a href="comment/edit/{{$comment->id}}" class="badge badge-success p-2 mr-2"> Edit </a>
+                        <a href="comment/delete/{{$comment->id}}" class="badge badge-danger p-2"> Delete </a>
+                       
+                      @endif
+                    </div>
+                    @endif
+                    
+                    {{-- <form action="{{'/comment/edit/' . $comment->id}}" method="post">  
+                      <div class="row">
+                        <div class="col-12 mb-4">
+                          <textarea name="comment" rows="7" class="form-control" placeholder="Comment"></textarea>
+                        </div>
+                    </div>
+                  </form> --}}
                   </div>
 
-                  <div class="card comment-card">
+                  {{-- <div class="card comment-card">
                     <div class="card-body">
                       <div class="author-date">
                         <div class="author">
@@ -104,64 +123,30 @@
                           ab numquam excepturi commodi nam omnis eaque, culpa earum!</p>
                       </div>
                     </div>
-                  </div>
+                  </div> --}}
                 </div>
-                <div class="card comment-card">
-                  <div class="card-body">
-                    <div class="author-date">
-                      <div class="author">
-                        <img src="assets/images/person2.jpg" alt="" class="rounded-circle" />
-                      </div>
-                      <div class="inner-author-date">
-                        <div class="author">
-                          <span class="">Iman Lindsay</span>
-                        </div>
-                        <div class="date"><span>1 Feb, 2019</span></div>
-                      </div>
-                    </div>
-                    <div class="comment-text mt-2">
-                      <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem ipsum voluptatum suscipit
-                        ipsam, dolorem quas animi magnam repellendus. Quidem unde maxime fugit, cupiditate veritatis
-                        maiores dolor corporis consequuntur pariatur quo culpa ipsum! Eos aliquid deserunt incidunt
-                        ratione ullam eaque. Ducimus?</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="card comment-card">
-                  <div class="card-body">
-                    <div class="author-date">
-                      <div class="author">
-                        <img src="assets/images/person3.jpg" alt="" class="rounded-circle" />
-                      </div>
-                      <div class="inner-author-date">
-                        <div class="author">
-                          <span class="">Simone Bob</span>
-                        </div>
-                        <div class="date"><span>1 Feb, 2019</span></div>
-                      </div>
-                    </div>
-                    <div class="comment-text mt-2">
-                      <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eos quos optio
-                        ab numquam excepturi commodi nam omnis eaque, culpa earum!</p>
-                    </div>
-                  </div>
-                </div>
+                @endforeach
+                
               </div>
-              <form class="comment-form">
+              @if (Auth::user())
+              <form class="comment-form" method="post" action="{{route('comment.store', $post->id)}}">
+                @csrf
                 <h5>Leave a comment</h5>
                 <div class="row">
-                  <div class="col-12 col-md-6 mb-4">
-                    <input type="text" class="form-control" placeholder="Full Name">
-                  </div>
-                  <div class="col-12 col-md-6 mb-4">
-                    <input type="email" class="form-control" placeholder="Email">
-                  </div>
                   <div class="col-12 mb-4">
-                    <textarea rows="7" class="form-control" placeholder="Comment"></textarea>
+                    <textarea name="comment" rows="7" class="form-control" placeholder="Comment"></textarea>
                   </div>
                 </div>
-                <button class="btn btn-solid">Submit</button>
+                <button type="submit" class="btn btn-solid">Submit</button>
               </form>
+              @else
+              <div class="row mt-3">
+                <div class="col-12 mb-4 d-flex justify-content-center">
+                  <h5 class="text-primary">Please Login To Comment On Posts.</h5>
+                </div>
+              </div>
+              @endif
+              
             </div>
           </div>
         </div>
@@ -194,11 +179,12 @@
                 <h5><i class="fas fa-circle"></i>Popular Posts</h5>
               </div>
               <div class="sidebar-content">
+                @foreach ($popularPosts as $popularPost)
                 <div class="card border-0">
                   <div class="row no-gutters align-items-center">
                     <div class="col-3 col-md-3">
-                      <a href="#">
-                        <img src="assets/images/sea-lighthouse.jpg" class="card-img" alt="">
+                      <a href="{{route('frontend.single', $popularPost->slug)}}">
+                        <img src="{{asset('/image/'.$popularPost->image) }}" class="card-img" alt="">
 
                       </a>
                     </div>
@@ -207,16 +193,15 @@
                         <ul class="category-tag-list mb-0">
 
                           <li class="category-tag-name">
-                            <a href="#">Lifestyle</a>
+                            <a href="#">{{$popularPost->category->category_name}}</a>
                           </li>
                         </ul>
-                        <h5 class="card-title title-font"><a href="#">Lighthouse since
-                            ages</a>
+                        <h5 class="card-title title-font"><a href="{{route('frontend.single', $popularPost->slug)}}">{{$popularPost->title}}</a>
                         </h5>
                         <div class="author-date">
 
-                          <a class="date" href="#">
-                            <span>21 Dec, 2019</span>
+                          <a class="date">
+                            <span>{{date('jS M , Y',strtotime ($popularPost->updated_at))}}</span>
                           </a>
                         </div>
                       </div>
@@ -224,122 +209,7 @@
 
                   </div>
                 </div>
-                <div class="card border-0">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col-3 col-md-3">
-                      <a href="#">
-                        <img src="assets/images/paris.jpg" class="card-img" alt="">
-
-                      </a>
-                    </div>
-                    <div class="col-9 col-md-9">
-                      <div class="card-body">
-                        <ul class="category-tag-list mb-0">
-
-                          <li class="category-tag-name">
-                            <a href="#">Lifestyle</a>
-                          </li>
-                        </ul>
-                        <h5 class="card-title title-font"><a href="#">5 things you should
-                            not miss about Paris</a>
-                        </h5>
-                        <div class="author-date">
-
-                          <a class="date" href="#">
-                            <span>21 Dec, 2019</span>
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-
-                  </div>
-                </div>
-                <div class="card border-0">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col-3 col-md-3">
-                      <a href="#">
-                        <img src="assets/images/orange-bus.jpg" class="card-img" alt="">
-
-                      </a>
-                    </div>
-                    <div class="col-9 col-md-9">
-                      <div class="card-body">
-                        <ul class="category-tag-list mb-0">
-
-                          <li class="category-tag-name">
-                            <a href="#">Lifestyle</a>
-                          </li>
-                        </ul>
-                        <h5 class="card-title title-font"><a href="#">5 reasons for travelling more</a>
-                        </h5>
-                        <div class="author-date">
-
-                          <a class="date" href="#">
-                            <span>21 Dec, 2019</span>
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-
-                  </div>
-                </div>
-                <div class="card border-0">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col-3 col-md-3">
-                      <a href="#">
-                        <img src="assets/images/city-pink.jpg" class="card-img" alt="">
-
-                      </a>
-                    </div>
-                    <div class="col-9 col-md-9">
-                      <div class="card-body">
-                        <ul class="category-tag-list mb-0">
-
-                          <li class="category-tag-name">
-                            <a href="#">Lifestyle</a>
-                          </li>
-                        </ul>
-                        <h5 class="card-title title-font"><a href="#">Pink city</a>
-                        </h5>
-                        <div class="author-date">
-                          <a class="date" href="#">
-                            <span>21 Dec, 2019</span>
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-
-                  </div>
-                </div>
-                <div class="card border-0">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col-3 col-md-3">
-                      <a href="#">
-                        <img src="assets/images/umbrella.jpg" class="card-img" alt="">
-
-                      </a>
-                    </div>
-                    <div class="col-9 col-md-9">
-                      <div class="card-body">
-                        <ul class="category-tag-list mb-0">
-
-                          <li class="category-tag-name">
-                            <a href="#">Lifestyle</a>
-                          </li>
-                        </ul>
-                        <h5 class="card-title title-font"><a href="#">Top 10 tips with common lifestyles</a>
-                        </h5>
-                        <div class="author-date">
-
-                          <a class="date" href="#">
-                            <span>21 Dec, 2019</span>
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-
-                  </div>
-                </div>
+                @endforeach
               </div>
             </div>
             <div class="recent-posts mt-4">

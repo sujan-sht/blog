@@ -24,7 +24,9 @@
                                         </li>
 
                                     </ul>
-                                    <h5 class="card-title title-font"><a href="{{route('frontend.single', $post->slug)}}">{{$post->title}}</a></h5>
+                                    <h5 class="card-title title-font">
+                                        <a href="{{route('frontend.single', $post->slug)}}">{{$post->title}}</a>
+                                    </h5>
                                     <p class="card-text">{!! Str::limit($post->description,250) !!}</p>
                                     <a href="{{route('frontend.single', $post->slug)}}">Read more..</a>
                                         <div class="author-date">
@@ -54,27 +56,27 @@
                         <div class="sidebar-title">
                             <h5><i class="fas fa-circle"></i>Popular Posts</h5>
                         </div>
-                        <div class="sidebar-content p-0">
+                        <div class="sidebar-content">
+                            @foreach ($popularPosts as $popularPost)
                             <div class="card border-0">
-                                <div class="row no-gutters align-items-center">
+                                <div class="row no-gutters align-items-center pb-2">
                                     <div class="col-3 col-md-3">
-                                        <a href="#">
-                                            <img src="assets/images/sea-lighthouse.jpg" class="card-img" alt="">
+                                        <a href="{{route('frontend.single', $popularPost->slug)}}">
+                                            <img src="{{asset('/image/'.$popularPost->image) }}" class="card-img" alt="">
                                         </a>
                                     </div>
                                     <div class="col-9 col-md-9">
                                         <div class="card-body">
                                             <ul class="category-tag-list mb-0">
                                                 <li class="category-tag-name">
-                                                    <a href="#">Lifestyle</a>
+                                                    <a href="#">{{$popularPost->category->category_name}}</a>
                                                 </li>
                                             </ul>
-                                            <h5 class="card-title title-font"><a href="#">Lighthouse since
-                                                    ages</a>
+                                            <h5 class="card-title title-font"><a href="{{route('frontend.single', $popularPost->slug)}}">{{$popularPost->title}}</a>
                                             </h5>
                                             <div class="author-date">
-                                                <a class="date" href="#">
-                                                    <span>21 Dec, 2019</span>
+                                                <a class="date">
+                                                    <span>{{date('jS M , Y',strtotime ($popularPost->updated_at))}}</span>
                                                 </a>
                                             </div>
                                         </div>
@@ -82,118 +84,7 @@
 
                                 </div>
                             </div>
-                            <div class="card border-0">
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col-3 col-md-3">
-                                        <a href="#">
-                                            <img src="assets/images/paris.jpg" class="card-img" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="col-9 col-md-9">
-                                        <div class="card-body">
-                                            <ul class="category-tag-list mb-0">
-                                                <li class="category-tag-name">
-                                                    <a href="#">Lifestyle</a>
-                                                </li>
-                                            </ul>
-                                            <h5 class="card-title title-font"><a href="#">5 things you should
-                                                    not miss about Paris</a>
-                                            </h5>
-                                            <div class="author-date">
-                                                <a class="date" href="#">
-                                                    <span>21 Dec, 2019</span>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="card border-0">
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col-3 col-md-3">
-                                        <a href="#">
-                                            <img src="assets/images/orange-bus.jpg" class="card-img" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="col-9 col-md-9">
-                                        <div class="card-body">
-                                            <ul class="category-tag-list mb-0">
-                                                <li class="category-tag-name">
-                                                    <a href="#">Lifestyle</a>
-                                                </li>
-                                            </ul>
-                                            <h5 class="card-title title-font"><a href="#">5 reasons for
-                                                    travelling more</a>
-                                            </h5>
-                                            <div class="author-date">
-                                                <a class="date" href="#">
-                                                    <span>21 Dec, 2019</span>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="card border-0">
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col-3 col-md-3">
-                                        <a href="#">
-                                            <img src="assets/images/city-pink.jpg" class="card-img" alt="">
-
-                                        </a>
-                                    </div>
-                                    <div class="col-9 col-md-9">
-                                        <div class="card-body">
-                                            <ul class="category-tag-list mb-0">
-
-                                                <li class="category-tag-name">
-                                                    <a href="#">Lifestyle</a>
-                                                </li>
-                                            </ul>
-                                            <h5 class="card-title title-font"><a href="#">Pink city</a>
-                                            </h5>
-                                            <div class="author-date">
-
-                                                <a class="date" href="#">
-                                                    <span>21 Dec, 2019</span>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="card border-0">
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col-3 col-md-3">
-                                        <a href="#">
-                                            <img src="assets/images/umbrella.jpg" class="card-img" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="col-9 col-md-9">
-                                        <div class="card-body">
-                                            <ul class="category-tag-list mb-0">
-
-                                                <li class="category-tag-name">
-                                                    <a href="#">Lifestyle</a>
-                                                </li>
-                                            </ul>
-                                            <h5 class="card-title title-font"><a href="#">Top 10 tips with
-                                                    common lifestyles</a>
-                                            </h5>
-                                            <div class="author-date">
-
-                                                <a class="date" href="#">
-                                                    <span>21 Dec, 2019</span>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                     <div class="popular-tags mt-4">
@@ -229,12 +120,12 @@
                                 @foreach ($categories as $category)
                                 @if ($category->status==1)
                                 <div class="card small-card">
-                                    <a href="#"><img src="assets/images/shoes.jpg" class="card-img"
-                                            alt="" /></a>
-                                    <div class="card-img-overlay">
+                                    <img src="{{asset('frontend/assets/images/wall.jpg')}}" class="card-img"
+                                            alt="" />
+                                    <div class="card-img-overlay" style="background:none;">
                                         
                                         <h5 class="card-title title-font mb-0">
-                                            <a href="#">{{$category->category_name}}</a>
+                                            {{$category->category_name}}
                                         </h5>
                                        
                                     </div>
