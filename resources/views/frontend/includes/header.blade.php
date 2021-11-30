@@ -7,11 +7,15 @@
             </span>
             <div class="brand-name">
                 <a href="{{route('frontend.index')}}">
-                    <p>Blog</p>
+                    
+                    <img src="{{asset('logo/'.$setting->image)}}" alt="" class="rounded float-left" style="width:80px;">
                 </a>
             </div>
             <ul class="nav-menu ml-auto" id="nav-menu-toggle">
-                <li class="nav-item"><a href="{{route('frontend.index')}}" class="nav-link">Home</a></li>
+                @foreach ($menus as $menu)
+                    <li class="nav-item"><a href="{{route($menu->url)}}" class="nav-link">{{$menu->name}}</a></li>
+                @endforeach
+                
                 {{-- <li class="nav-item"><a href="#" class="nav-link">Categories <span class="arrow-icon"> <span
                                 class="left-bar"></span>
                             <span class="right-bar"></span></span>

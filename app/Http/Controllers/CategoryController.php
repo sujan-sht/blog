@@ -23,10 +23,8 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        $validateData = $request->validate([
-            'category_name'=>'required',
-            
-        ]);
+        
+        $this->validateData($request);
         
         $post =new Category();
         $post->category_name=$data['category_name'];
@@ -50,10 +48,8 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->all();
-        $validateData = $request->validate([
-            'category_name'=>'required',
-            
-        ]);
+        $this->validateData($request);
+        
         $post =Category::findOrFail($id);
         $post->category_name=$data['category_name'];
         $post->slug = Str::slug($data['category_name']);

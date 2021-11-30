@@ -7,6 +7,10 @@ use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\CkeditorController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\FrontendSettingsController;
+use App\Http\Controllers\NavbarController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -60,8 +64,20 @@ Route::group(['middleware' => ['auth']],function(){
     Route::post('/category/edit/{category}', [CategoryController::class,'update']);
     Route::get('/category/delete/{category}', [CategoryController::class,'destroy']);
 
-    
+    //Frontend Settings Controller
+    Route::get('/settings', [FrontendSettingsController::class,'index'])->name('admin.settings.index');
+    Route::get('/settings/create', [FrontendSettingsController::class,'create'])->name('admin.settings.create');
+    Route::post('/settings/create', [FrontendSettingsController::class,'store'])->name('admin.settings.store');
+    Route::get('/settings/edit/{settings}', [FrontendSettingsController::class,'edit'])->name('admin.settings.edit');
+    Route::post('/settings/edit/{settings}', [FrontendSettingsController::class,'update']);
 
+    //navbar controller
+    Route::get('/navbar', [NavbarController::class,'index'])->name('admin.navbar.index');
+    Route::get('/navbar/create', [NavbarController::class,'create'])->name('admin.navbar.create');
+    Route::post('/navbar/create', [NavbarController::class,'store'])->name('admin.navbar.store');
+    Route::get('/navbar/edit/{navbar}', [NavbarController::class,'edit'])->name('admin.navbar.edit');
+    Route::post('/navbar/edit/{navbar}', [NavbarController::class,'update']);
+    Route::get('/navbar/delete/{navbar}', [NavbarController::class,'destroy']);
 
 });
 

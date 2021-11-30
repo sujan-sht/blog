@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Category;
+use App\Models\Setting;
+use App\Models\Navbar;
 use DB;
 
 class PagesController extends Controller
@@ -13,7 +15,9 @@ class PagesController extends Controller
         $posts = Post::inRandomOrder()->paginate(5);
         $categories = Category::where('parent_id',0)->get();
         $popularPosts=Post::all()->sortByDesc('view_count')->take(5);
-        return view('frontend.index',compact('posts','categories','popularPosts'))->with('user');
+        $setting=Setting::first();
+        $menus=Navbar::orderBy('order')->get();
+        return view('frontend.index',compact('posts','categories','popularPosts','setting','menus'))->with('user');
     }
 
     public function single($slug){

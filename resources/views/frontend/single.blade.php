@@ -195,6 +195,9 @@
                           <li class="category-tag-name">
                             <a href="#">{{$popularPost->category->category_name}}</a>
                           </li>
+                          <li class="category-tag-name float-right">
+                            <a href="#">{{$popularPost->view_count}}</a>
+                          </li>
                         </ul>
                         <h5 class="card-title title-font"><a href="{{route('frontend.single', $popularPost->slug)}}">{{$popularPost->title}}</a>
                         </h5>

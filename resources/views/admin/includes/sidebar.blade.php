@@ -7,6 +7,10 @@
                     <span>Main</span>
                 </li>
                 <li>
+                    <a href="{{route('frontend.index')}}"><i class="la la-home"></i> <span> Go to site</span> </a>
+
+                </li>
+                <li>
                     <a href="{{ route('admin.dashboard') }}"><i class="la la-dashboard"></i> <span> Dashboard</span> </span></a>
                     {{-- <ul style="display: none;">
                         <li><a class="active" href="index.html">Admin Dashboard</a></li>
@@ -25,6 +29,14 @@
                 </li>
                 <li>
                     <a href="{{ route('admin.category.index') }}"><i class="la la-list"></i> <span> Category</span> </a>
+
+                </li>
+                <li>
+                    <a href="{{route('admin.settings.index')}}"><i class="la la-cog"></i> <span> Site Settings</span> </a>
+
+                </li>
+                <li>
+                    <a href="{{route('admin.navbar.index')}}"><i class="la la-cog"></i> <span> Navigation Menu</span> </a>
 
                 </li>
 

@@ -3,21 +3,19 @@
     <div class="container">
       <div class="footer-content">
         <div class="footer-logo">
-          <a href="#">
-            <h5 class="brand-name"> Kavya</h5>
-          </a>
+          <a href="{{route('frontend.index')}}">
+            <img src="{{asset('logo/'.$setting->image)}}" alt="" class="rounded float-left" style="width:100px;">
+        </a>
         </div>
         <div class="footer-copyright">
-          <p>&copy;2019 Kavya. All rights reserved. Theme designed by <a href="#">CodeVibrant</a> </p>
+          <p>{{$setting->footer}} </p>
         </div>
         <div class="social-links">
           <ul>
-            <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-            <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-            <li><a href="#"><i class="fab fa-pinterest-p"></i></a></li>
-            <li><a href="#"><i class="fab fa-instagram"></i></a></li>
-            <li><a href="#"><i class="fab fa-youtube"></i></a></li>
-            <li><a href="#"><i class="fab fa-vimeo-v"></i></a></li>
+            <li><a href="{{$setting->facebook}}"><i class="fab fa-facebook-f"></i></a></li>
+            <li><a href="{{$setting->twitter}}"><i class="fab fa-twitter"></i></a></li>
+            <li><a href="{{$setting->whatsapp}}"><i class="fab fa-whatsapp"></i></a></li>
+            <li><a href="{{$setting->linkedin}}"><i class="fab fa-linkedin"></i></a></li>
           </ul>
         </div>
       </div>
