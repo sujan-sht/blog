@@ -23,6 +23,7 @@
                     </div>
                 </div>
                 <!-- /Page Header -->          
+                @include('admin.includes.message')
                 
                 <div class="card mb-0">
                     <div class="card-body">
@@ -31,28 +32,20 @@
                                 <div class="profile-view">
                                     <div class="profile-img-wrap">
                                         <div class="profile-img">
-                                            <?php
-                                            if(file_exists(asset('/image/profileImage/'.Auth::user()->image))){
-                                            ?>
-                                                <img alt="" src="{{asset('/image/profileImage/'.Auth::user()->image)}}">
-                                            <?php 
-                                            }else{ ?>
-                                                <img alt="" src="{{asset('/image/profileImage/default.jpg')}}">
-                                            <?php } ?>
-                                            
+                                            @isset(Auth::user()->image)
+                                                <img src="{{('/image/profileImage/'.Auth::user()->image)}}" alt="Logo" width="100px">
+                                            @else
+                                                <img src="{{(asset('/image/profileImage/default.jpg'))}}" alt="Logo" width="100px">
+                                            @endisset   
                                         </div>
                                     </div>
                                     <div class="profile-basic">
                                         <div class="row">
                                             <div class="col-md-5">
                                                 <div class="profile-info-left mt-4">
-                                                    <label>Name:</label>
-                                                    <h3 class="user-name">{{Auth::user()->name}}</h3>
-                                                    <label>Email:</label>
-                                                    <h3 class="text"><a href="">{{Auth::user()->email}}</a></h3>
-                                                    
-                                                </div>
-                                                
+                                                    <h4 class="user-name">{{Auth::user()->name}}</h4>
+                                                    <h4 class="text"><a href="">{{Auth::user()->email}}</a></h4>
+                                                </div>  
                                             </div>
                                             <div class="col-md-7">
                                                 {{Auth::user()->about}}

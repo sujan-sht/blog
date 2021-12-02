@@ -243,8 +243,7 @@
             </a>
             <div class="dropdown-menu">
                 <a class="dropdown-item" href="{{ route('admin.profile.profile') }}">My Profile</a>
-                
-                
+                <a class="dropdown-item" href="{{ route('admin.profile.change_password') }}">Change Password</a>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <x-dropdown-link :href="route('logout')"

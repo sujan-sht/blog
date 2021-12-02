@@ -46,7 +46,7 @@
                                     </div>
                                 </div>
                                 
-                                <div class="form-group row">
+                                {{-- <div class="form-group row">
                                     <div class="col-md-6">
                                         <label class="col-form-label">Current Password</label>
                                         <input type="password" class="form-control" name="current_password">
@@ -55,25 +55,24 @@
                                         <label class="col-form-label">New Password</label>
                                         <input type="password" class="form-control" name="password">
                                     </div>
-                                </div>
+                                </div> --}}
                                 
                                 <div class="form-group row">
-                                    <div class="col-md-6">
+                                    {{-- <div class="col-md-6">
                                         <label class="col-form-label">Confirm Password</label>
                                         <input type="password" class="form-control" name="confirm_password">
-                                    </div>
+                                    </div> --}}
                                     <div class="col-md-6">
                                         <label class="col-form-label">Profile Image</label>
                                         <input class="form-control" type="file" name="image" id="image">
                                     </div>
-                                </div>
-                                <div class="form-group row">
                                     <div class="col-md-6">
                                         <label class="col-form-label">About You</label>
                                         <textarea class="form-control" rows="5" name="about">{{ old('about', Auth::user()->about) }}</textarea>
                                     </div>
+                                </div>
+                                <div class="form-group row">
                                     <div class="col-md-6 mt-3">
-                                        
                                         <img id="preview-image-before-upload"  style="max-height: 150px;"> 
                                     </div>
                                 </div>

@@ -27,20 +27,14 @@ class UserProfileController extends Controller
         $request->validate([
             'name'=>'required',
             'email'=>'required|email',
-            'current_password'=>'required',
-            'password'=>'required|same:confirm_password|min:6',
-            'confirm_password'=>'required'
+            
         ]);
                 
         $user=Auth::user();
-        $userPassword=$user->password;
-
-        if(!Hash::check($request->current_password,$userPassword)){
-            return redirect('/profile/edit')->with('error','Current password doesnot match');
-        }
+        
         $user->name=$request->input('name');
         $user->email=$request->input('email');
-        $user->password=Hash::make($request->input('password'));
+        
         $user->about=$request->input('about');
         if ($image = $request->file('image')) {
             $image_path = public_path('image/profileImage/' . $user->image);
@@ -60,5 +54,25 @@ class UserProfileController extends Controller
         $user->update();
 
         return redirect('/profile')->with('status','Profile has been updated successfully');
+    }
+
+    public function changePassword(){
+        return view('admin.profile.changePassword');
+    }
+    public function updatePassword(Request $request){
+        $request->validate([
+            'current_password'=>'required',
+            'password'=>'required|same:confirm_password|min:6',
+            'confirm_password'=>'required'
+        ]);
+        $user=Auth::user();
+        $userPassword=$user->password;
+
+        if(!Hash::check($request->current_password,$userPassword)){
+            return redirect('/profile/change_password')->with('error','Current password doesnot match');
+        }
+        $user->password=Hash::make($request->input('password'));
+        $user->update();
+        return redirect('/profile')->with('status','Password has been changed successfully');
     }
 }

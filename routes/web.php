@@ -48,7 +48,8 @@ Route::group(['middleware' => ['auth']],function(){
     })->name('admin.profile.profile');
     Route::get('/profile/edit',[UserProfileController::class,'edit'])->name('admin.profile.edit');
     Route::post('/profile/update',[UserProfileController::class,'update'])->name('profile.update');
-    
+    Route::get('/profile/change_password',[UserProfileController::class,'changePassword'])->name('admin.profile.change_password');
+    Route::post('/profile/change_password',[UserProfileController::class,'updatePassword'])->name('profile.change_password');    
 
     //Post controller
     Route::get('/blog', [PostController::class,'index'])->name('admin.post.index');
