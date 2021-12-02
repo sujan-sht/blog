@@ -32,7 +32,11 @@
                         <div class="profile-view">
                             <div class="profile-img-wrap">
                                 <div class="profile-img">
-                                    <img alt="" src="{{asset('logo/'.$setting->image)}}">
+                                    @isset($setting->image)
+                                        <img src="{{(asset('logo/'.$setting->image))}}" alt="Logo" width="100px">
+                                    @else
+                                        <img src="{{(asset('logo/logo.png'))}}" alt="Logo" width="100px">
+                                    @endisset
                                 </div>
                                 
                             </div>
@@ -40,11 +44,24 @@
                                 <div class="row">
                                     <div class="col-md-5">
                                         <div class="profile-info-left">
-                                            <h3 class="user-name m-t-0 mb-0">{{$setting->name}}</h3>
+                                            <h3 class="user-name m-t-0 mb-0">
+                                                @isset($setting->name)
+                                                    {{$setting->name}}                                               
+                                                @endisset
+                                            </h3>
                                             <h6 class="text-muted">{{Auth::user()->name}}</h6>
                                             <div class="staff-id">User ID : {{Auth::user()->id}}</div>
-                                            <div class="small doj text-muted">{{date('jS M , Y',strtotime ($setting->updated_at))}}</div>
-                                            <div class="staff-id">Footer Text : {{$setting->footer}}</div>
+                                            <div class="small doj text-muted">
+                                                @isset($setting->updated_at)
+                                                    {{date('jS M , Y',strtotime ($setting->updated_at))}}              
+                                                @endisset
+                                            </div>
+                                            <div class="staff-id">
+                                                Footer Text :
+                                                @isset($setting->footer)
+                                                     {{$setting->footer}}        
+                                                @endisset
+                                            </div>
                                             
                                         </div>
                                     </div>
@@ -52,38 +69,83 @@
                                         <ul class="personal-info">
                                             <li>
                                                 <div class="title">Contact:</div>
-                                                <div class="text">{{$setting->contact}}</div>
+                                                <div class="text">
+                                                    @isset($setting->contact)
+                                                    {{$setting->contact}}        
+                                                    @endisset
+                                                </div>
                                             </li>
                                             <li>
                                                 <div class="title">Email:</div>
-                                                <div class="text"><a href="">{{$setting->email}}</a></div>
+                                                <div class="text">
+                                                    <a href="">
+                                                        @isset($setting->email)
+                                                            {{$setting->email}}        
+                                                        @endisset
+                                                    </a>
+                                                </div>
                                             </li>
                                             <li>
                                                 <div class="title">Address:</div>
-                                                <div class="text">{{$setting->address}}</div>
+                                                <div class="text">
+                                                    @isset($setting->address)
+                                                        {{$setting->address}}        
+                                                    @endisset
+                                                </div>
                                             </li>
                                             <li>
                                                 <div class="title">Facebook:</div>
-                                                <div class="text"><a href="">{{$setting->facebook}}</a></div>
+                                                <div class="text">
+                                                    <a href="">
+                                                        @isset($setting->facebook)
+                                                            {{$setting->facebook}}        
+                                                        @endisset
+                                                    </a>
+                                                </div>
                                             </li>
                                             <li>
                                                 <div class="title">WhatsApp:</div>
-                                                <div class="text"><a href="">{{$setting->whatsapp}}</a></div>
+                                                <div class="text">
+                                                    <a href="">
+                                                        @isset($setting->whatsapp)
+                                                            {{$setting->whatsapp}}        
+                                                        @endisset
+                                                    </a>
+                                                </div>
                                             </li>
                                             <li>
                                                 <div class="title">LinkedIn:</div>
-                                                <div class="text"><a href="">{{$setting->linkedin}}</a></div>
+                                                <div class="text">
+                                                    <a href="">
+                                                        @isset($setting->linkedin)
+                                                            {{$setting->linkedin}}        
+                                                        @endisset
+                                                    </a>
+                                                </div>
                                             </li>
                                             <li>
                                                 <div class="title">Twitter:</div>
-                                                <div class="text"><a href="">{{$setting->twitter}}</a></div>
+                                                <div class="text">
+                                                    <a href="">
+                                                        @isset($setting->twitter)
+                                                            {{$setting->twitter}}        
+                                                        @endisset
+                                                    </a>
+                                                </div>
                                             </li>
                                             
                                         </ul>
                                     </div>
                                 </div>
                             </div>
-                            <div class="pro-edit"><a class="edit-icon" href="/settings/edit/{{$setting->id}}"><i class="fa fa-pencil"></i></a></div>
+                            @isset($setting->id)
+                            <div class="pro-edit">
+                                <a class="edit-icon" href="/settings/edit/{{$setting->id}}">
+                                <i class="fa fa-pencil">
+                                </i>
+                                </a>
+                            </div>
+                            @endisset
                         </div>
                     </div>
                 </div>

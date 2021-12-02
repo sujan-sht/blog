@@ -74,14 +74,25 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <img id="preview-image-before-upload"  style="max-height: 150px;">
+                                    <div class="col-md-6">
+                                        <img id="preview-image-before-upload"  style="max-height: 150px;">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="col-form-label">Tags</label><br>
+                                        <input class="form-control" type="text" data-role="tagsinput" name="tags">
+                                        @if ($errors->has('tags'))
+                                            <span class="text-danger">{{ $errors->first('tags') }}</span>
+                                        @endif
+                                    </div>
                                 </div>
+                                
                                 <button type="submit" class="btn btn-success float-right">Create Post</button>
                             </form>
                         </div>
                     </div>
 
                 </div>
+                
             </div>
         
         </div>			

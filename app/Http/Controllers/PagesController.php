@@ -22,10 +22,12 @@ class PagesController extends Controller
 
     public function single($slug){
         $trends=Post::latest()->take(5)->get();
+        $setting=Setting::first();
         $post = Post::where('slug', $slug)->first();
         DB::table('posts')->where('id', $post->id)->increment('view_count', 1);
         $popularPosts=Post::all()->sortByDesc('view_count')->take(5);
-        return view('frontend.single',compact('trends','post','popularPosts'))->with('no',1);
+        $menus=Navbar::orderBy('order')->get();
+        return view('frontend.single',compact('trends','post','popularPosts','setting','menus'))->with('no',1);
     }
     
     

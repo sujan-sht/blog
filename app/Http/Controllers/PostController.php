@@ -31,6 +31,7 @@ class PostController extends Controller
      */
     public function create()
     {
+        
         $categories = Category::where('parent_id',0)->where('status',1)->get();
         $categories_dropdown = "<option value='' selected disabled> Select Category Level </option>";
         foreach ($categories as $cat){
@@ -73,7 +74,9 @@ class PostController extends Controller
             $post['image'] = "$profileImage";
         }
         // dd($post);
+        $tags = explode(",", $request->tags);
         $post->save();
+        $post->tag($tags);
         return redirect('/blog')->with('status','Post has been created successfully');
     }
 

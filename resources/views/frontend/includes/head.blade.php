@@ -11,7 +11,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   
   <!-- Favicon -->
-  <link rel="icon" type="image/png" sizes="48x48" href="{{asset('logo/'.$setting->image)}}">
+  
+  @isset($setting->image)
+    <link rel="icon" type="image/png" sizes="48x48" href="{{asset('logo/'.$setting->image)}}">
+  @else
+    <link rel="icon" type="image/png" sizes="48x48" href="{{asset('logo/logo.png')}}"
+  @endisset
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700&amp;display=swap" rel="stylesheet">

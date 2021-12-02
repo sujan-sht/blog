@@ -12,6 +12,7 @@ use App\Models\Comment;
 class Post extends Model
 {
     use HasFactory;
+    use \Conner\Tagging\Taggable;
 
     protected $fillable =['title','user_id','description','slug','image','status'];
 

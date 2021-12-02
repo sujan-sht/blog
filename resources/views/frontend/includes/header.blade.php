@@ -7,8 +7,12 @@
             </span>
             <div class="brand-name">
                 <a href="{{route('frontend.index')}}">
+                    @isset($setting->image)
+                        <img src="{{(asset('logo/'.$setting->image))}}" alt="Logo" width="100px">
+                    @else
+                        <img src="{{(asset('logo/logo.png'))}}" alt="Logo" width="100px">
+                    @endisset
                     
-                    <img src="{{asset('logo/'.$setting->image)}}" alt="" class="rounded float-left" style="width:80px;">
                 </a>
             </div>
             <ul class="nav-menu ml-auto" id="nav-menu-toggle">

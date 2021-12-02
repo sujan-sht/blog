@@ -96,6 +96,7 @@
                         </div>
                         <div class="sidebar-content">
                             <ul class="sidebar-list tags-list">
+                                
                                 <li><a href="#">Food</a></li>
                                 <li><a href="#">Technology</a></li>
                                 <li><a href="#">UI/UX</a></li>

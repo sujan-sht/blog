@@ -14,7 +14,7 @@ class CreateNavbarsTable extends Migration
     public function up()
     {
         Schema::create('navbars', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->string('name');
             $table->string('url');
             $table->integer('order')->default(0);

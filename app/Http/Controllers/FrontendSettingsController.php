@@ -9,6 +9,7 @@ class FrontendSettingsController extends Controller
 {
     public function index(){
         $setting=Setting::first();
+        
         return view('admin.settings.index',compact('setting'));
     }
 

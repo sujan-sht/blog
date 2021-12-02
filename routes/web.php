@@ -7,6 +7,7 @@ use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\CkeditorController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\CommentReplyController;
 use App\Http\Controllers\FrontendSettingsController;
 use App\Http\Controllers\NavbarController;
 
@@ -31,6 +32,9 @@ Route::post('/post/{post}',[CommentController::class,'store'])->name('comment.st
 Route::get('/post/comment/edit/{comment}',[CommentController::class,'edit'])->name('comment.edit');
 Route::post('/post/comment/edit/{comment}',[CommentController::class,'update']);
 Route::get('/post/comment/delete/{comment}', [CommentController::class,'delete']);
+
+Route::post('/comment-reply/{comment}',[CommentReplyController::class,'store'])->name('reply.store');
+
 
 Route::group(['middleware' => ['auth']],function(){
     Route::get('/dashboard', function () {

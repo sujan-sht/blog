@@ -44,6 +44,16 @@
               {!! $post->description !!}
             </div>
             <div class="tags-wrap">
+              <div class="blog-tags">
+                <p>Tags:</p>
+                <ul class="sidebar-list tags-list">
+                  <div>
+                      @foreach($post->tags as $tag)
+                        <li><a href="#">{{ $tag->name }}</a></li>
+                      @endforeach
+                  </div>
+                </ul>
+              </div>
               <div class="share-buttons">
                 <p>Share Now:</p>
                 <!-- Go to www.addthis.com/dashboard to customize your tools -->
@@ -87,44 +97,58 @@
                       
                     </div>
                     @if (Auth::user())
-                    <div class="d-flex justify-content-end">
+                    <div class="d-flex justify-content-end mb-2">
+                      <a class="badge badge-primary p-2 mr-2" data-toggle="collapse" href="#reply" role="button"
+                        aria-expanded="false" aria-controls="collapseExample">
+                        Reply
+                      </a>
                       @if (Auth::user()->id == $comment->user_id)
                         <a href="comment/edit/{{$comment->id}}" class="badge badge-success p-2 mr-2"> Edit </a>
                         <a href="comment/delete/{{$comment->id}}" class="badge badge-danger p-2"> Delete </a>
-                       
                       @endif
                     </div>
-                    @endif
-                    
-                    {{-- <form action="{{'/comment/edit/' . $comment->id}}" method="post">  
-                      <div class="row">
-                        <div class="col-12 mb-4">
-                          <textarea name="comment" rows="7" class="form-control" placeholder="Comment"></textarea>
-                        </div>
-                    </div>
-                  </form> --}}
-                  </div>
-
-                  {{-- <div class="card comment-card">
-                    <div class="card-body">
-                      <div class="author-date">
-                        <div class="author">
-                          <img src="assets/images/writer.jpg" alt="" class="rounded-circle" />
-                        </div>
-                        <div class="inner-author-date">
-                          <div class="author">
-                            <span>Julie Perry</span>
+                    <div class="collapse" id="reply">
+                      <form action="{{route('reply.store', $comment->id)}}" method="post">  
+                        @csrf
+                        <div class="row">
+                          <div class="col-12 mb-4">
+                            <textarea name="reply" rows="2" class="form-control" placeholder="Reply"></textarea>
                           </div>
-                          <div class="date"><span>1 Feb, 2019</span></div>
+                        </div>
+                        <button type="submit" class="btn btn-solid">Submit</button>
+                      </form>
+                    </div>
+                    @endif
+                  </div>
+                  @if ($comment->replies->count()>0)
+                      @foreach ($replies as $reply)
+                      <div class="card comment-card">
+                        <div class="card-body">
+                          <div class="author-date">
+                            <div class="author">
+                              <img src="{{asset('/image/profileImage/'.$reply->user->image)}}" alt="" class="rounded-circle" />
+                            </div>
+                            <div class="inner-author-date">
+                              <div class="author">
+                                <span>{{$reply->user->name}}</span>
+                              </div>
+                              <div class="date"><span>1 Feb, 2019</span></div>
+                            </div>
+                          </div>
+                          <div class="comment-text mt-2">
+                            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eos quos optio
+                              ab numquam excepturi commodi nam omnis eaque, culpa earum!</p>
+                          </div>
                         </div>
                       </div>
-                      <div class="comment-text mt-2">
-                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eos quos optio
-                          ab numquam excepturi commodi nam omnis eaque, culpa earum!</p>
-                      </div>
-                    </div>
-                  </div> --}}
+                      @endforeach
+                  @else
+
+                      
+                  @endif
+                  
                 </div>
+                
                 @endforeach
                 
               </div>

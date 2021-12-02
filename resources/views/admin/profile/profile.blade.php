@@ -31,7 +31,15 @@
                                 <div class="profile-view">
                                     <div class="profile-img-wrap">
                                         <div class="profile-img">
-                                            <img alt="" src="{{asset('/image/profileImage/'.Auth::user()->image)}}">
+                                            <?php
+                                            if(file_exists(asset('/image/profileImage/'.Auth::user()->image))){
+                                            ?>
+                                                <img alt="" src="{{asset('/image/profileImage/'.Auth::user()->image)}}">
+                                            <?php 
+                                            }else{ ?>
+                                                <img alt="" src="{{asset('/image/profileImage/default.jpg')}}">
+                                            <?php } ?>
+                                            
                                         </div>
                                     </div>
                                     <div class="profile-basic">
