@@ -96,7 +96,9 @@
                                             <li>
                                                 <div class="title">Facebook:</div>
                                                 <div class="text">
-                                                    <a href="">
+                                                    <a href="@isset($setting->facebook)
+                                                        {{$setting->facebook}}        
+                                                    @endisset">
                                                         @isset($setting->facebook)
                                                             {{$setting->facebook}}        
                                                         @endisset
@@ -106,7 +108,9 @@
                                             <li>
                                                 <div class="title">WhatsApp:</div>
                                                 <div class="text">
-                                                    <a href="">
+                                                    <a href="@isset($setting->whatsapp)
+                                                        {{$setting->whatsapp}}        
+                                                    @endisset">
                                                         @isset($setting->whatsapp)
                                                             {{$setting->whatsapp}}        
                                                         @endisset
@@ -116,7 +120,9 @@
                                             <li>
                                                 <div class="title">LinkedIn:</div>
                                                 <div class="text">
-                                                    <a href="">
+                                                    <a href="@isset($setting->linkedin)
+                                                        {{$setting->linkedin}}        
+                                                    @endisset">
                                                         @isset($setting->linkedin)
                                                             {{$setting->linkedin}}        
                                                         @endisset
@@ -126,7 +132,9 @@
                                             <li>
                                                 <div class="title">Twitter:</div>
                                                 <div class="text">
-                                                    <a href="">
+                                                    <a href="@isset($setting->twitter)
+                                                        {{$setting->twitter}}        
+                                                    @endisset">
                                                         @isset($setting->twitter)
                                                             {{$setting->twitter}}        
                                                         @endisset

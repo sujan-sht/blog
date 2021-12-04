@@ -42,7 +42,6 @@ Route::group(['middleware' => ['auth']],function(){
     })->name('admin.dashboard');
 
     //Profile controller
-    
     Route::get('/profile',function(){
         return view('admin.profile.profile');
     })->name('admin.profile.profile');
