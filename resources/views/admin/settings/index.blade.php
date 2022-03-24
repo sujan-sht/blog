@@ -96,7 +96,7 @@
                                             <li>
                                                 <div class="title">Facebook:</div>
                                                 <div class="text">
-                                                    <a href="">
+                                                    <a href="{{$setting->facebook}}">
                                                         @isset($setting->facebook)
                                                             {{$setting->facebook}}        
                                                         @endisset
@@ -106,7 +106,7 @@
                                             <li>
                                                 <div class="title">WhatsApp:</div>
                                                 <div class="text">
-                                                    <a href="">
+                                                    <a href="{{$setting->whatsapp}}">
                                                         @isset($setting->whatsapp)
                                                             {{$setting->whatsapp}}        
                                                         @endisset
@@ -116,7 +116,7 @@
                                             <li>
                                                 <div class="title">LinkedIn:</div>
                                                 <div class="text">
-                                                    <a href="">
+                                                    <a href="{{$setting->linkedin}}">
                                                         @isset($setting->linkedin)
                                                             {{$setting->linkedin}}        
                                                         @endisset
@@ -126,7 +126,7 @@
                                             <li>
                                                 <div class="title">Twitter:</div>
                                                 <div class="text">
-                                                    <a href="">
+                                                    <a href="{{$setting->twitter}}">
                                                         @isset($setting->twitter)
                                                             {{$setting->twitter}}        
                                                         @endisset

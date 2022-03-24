@@ -237,7 +237,8 @@
 
         <li class="nav-item dropdown has-arrow main-drop">
             <a href="index.html#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                <span class="user-img"><img src="{{asset('/image/profileImage/'.Auth::user()->image)}}" alt="">
+                <span class="user-img">
+                    <img src="{{asset('/image/profileImage/'.Auth::user()->image)}}" alt="">
                 <span class="status online"></span></span>
                 <span>{{ Auth::user()->name }}</span>
             </a>

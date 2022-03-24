@@ -28,7 +28,10 @@ class User extends Authenticatable
         'password',
         'new_password',
         'confirm_password',
-        'image'
+        'image',
+        'google_id',
+        'github_id',
+        'auth_type'
     ];
 
     /**

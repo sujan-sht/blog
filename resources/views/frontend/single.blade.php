@@ -83,7 +83,15 @@
                   <div class="card-body">
                     <div class="author-date">
                       <div class="author">
-                        <img src="{{asset('/image/profileImage/'.$comment->user->image)}}" alt="" class="rounded-circle" />
+                        @if (!empty($comment->user->image))
+                          @if (file_exists('image/profileImage/'.$comment->user->image))
+                            <img src="{{asset('image/profileImage/'.$comment->user->image)}}" alt="{{$comment->user->name}}" class="rounded-circle" />
+                          @else
+                            <img src="{{asset('placeholder-pp.jpg')}}" alt="{{$comment->user->name}}" class="rounded-circle" />
+                          @endif 
+                        @else
+                          <img src="{{asset('placeholder-pp.jpg')}}" alt="{{$comment->user->name}}" class="rounded-circle" />
+                        @endif
                       </div>
                       <div class="inner-author-date">
                         <div class="author">
@@ -110,6 +118,7 @@
                     <div class="collapse" id="reply">
                       <form action="{{route('reply.store', $comment->id)}}" method="post">  
                         @csrf
+                        <input type="hidden" value="{{$comment->id}}" name="commentId">
                         <div class="row">
                           <div class="col-12 mb-4">
                             <textarea name="reply" rows="2" class="form-control" placeholder="Reply"></textarea>
@@ -120,13 +129,25 @@
                     </div>
                     @endif
                   </div>
-                  @if ($comment->replies->count()>0)
+                  @php
+                      $replies=\App\Models\CommentReply::where('comment_id',$comment->id)->get();
+                  @endphp
+                  @if ($replies->count()>0)
                       @foreach ($replies as $reply)
+                      <hr>
                       <div class="card comment-card">
                         <div class="card-body">
                           <div class="author-date">
                             <div class="author">
-                              <img src="{{asset('/image/profileImage/'.$reply->user->image)}}" alt="" class="rounded-circle" />
+                              @if (!empty($reply->user->image))
+                                @if (file_exists('image/profileImage/'.$reply->user->image))
+                                  <img src="{{asset('/image/profileImage/'.$reply->user->image)}}" alt="" class="rounded-circle" />
+                                @else
+                                  <img src="{{asset('placeholder-pp.jpg')}}" alt="{{$reply->user->name}}" class="rounded-circle" />
+                                @endif
+                              @else
+                                <img src="{{asset('placeholder-pp.jpg')}}" alt="{{$reply->user->name}}" class="rounded-circle" />
+                              @endif
                             </div>
                             <div class="inner-author-date">
                               <div class="author">
@@ -136,8 +157,17 @@
                             </div>
                           </div>
                           <div class="comment-text mt-2">
-                            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eos quos optio
-                              ab numquam excepturi commodi nam omnis eaque, culpa earum!</p>
+                            <p>{{$reply->reply}}</p>
+                          </div>
+                          <div class="d-flex justify-content-end mb-2">
+                            <a class="badge badge-primary p-2 mr-2" data-toggle="collapse" href="#reply" role="button"
+                              aria-expanded="false" aria-controls="collapseExample">
+                              Reply
+                            </a>
+                            @if (Auth::user()->id == $comment->user_id)
+                              <a href="comment/edit/{{$comment->id}}" class="badge badge-success p-2 mr-2"> Edit </a>
+                              <a href="comment/delete/{{$comment->id}}" class="badge badge-danger p-2"> Delete </a>
+                            @endif
                           </div>
                         </div>
                       </div>

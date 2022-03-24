@@ -10,8 +10,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CommentReplyController;
 use App\Http\Controllers\FrontendSettingsController;
 use App\Http\Controllers\NavbarController;
-
-
+use App\Http\Controllers\SocialiteController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,7 +21,16 @@ use App\Http\Controllers\NavbarController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+use Laravel\Socialite\Facades\Socialite;
 
+Route::get('/auth/redirect',[SocialiteController::class,'githubRedirect'])->name('githubLogin');
+Route::get('/auth/callback',[SocialiteController::class,'callback']);
+
+Route::get('/auth/google/redirect',[SocialiteController::class,'googleRedirect'])->name('googleLogin');
+Route::get('/auth/google/callback',[SocialiteController::class,'googleCallback']);
+
+Route::get('/auth/facebook/redirect',[SocialiteController::class,'facebookRedirect'])->name('facebookLogin');
+Route::get('/auth/facebook/callback',[SocialiteController::class,'facebookCallback']);
 
 
 Route::get('/',[PagesController::class,'index'])->name('frontend.index');
@@ -42,7 +50,6 @@ Route::group(['middleware' => ['auth']],function(){
     })->name('admin.dashboard');
 
     //Profile controller
-    
     Route::get('/profile',function(){
         return view('admin.profile.profile');
     })->name('admin.profile.profile');

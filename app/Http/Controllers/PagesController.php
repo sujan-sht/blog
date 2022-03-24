@@ -23,7 +23,9 @@ class PagesController extends Controller
     public function single($slug){
         $trends=Post::latest()->take(5)->get();
         $setting=Setting::first();
-        $post = Post::where('slug', $slug)->first();
+        $post = Post::where('slug', $slug)->with('comments')->first();
+        // dd($post);
+        
         DB::table('posts')->where('id', $post->id)->increment('view_count', 1);
         $popularPosts=Post::all()->sortByDesc('view_count')->take(5);
         $menus=Navbar::orderBy('order')->get();

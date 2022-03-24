@@ -43,6 +43,7 @@ class RegisteredUserController extends Controller
         $data=$request->all();
         $user=new User();
         $user->name=$data['name'];
+        $user->role='user';
         $user->email = $data['email'];
         $user->password=Hash::make($data['password']);
         

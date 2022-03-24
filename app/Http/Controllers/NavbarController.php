@@ -20,11 +20,9 @@ class NavbarController extends Controller
 
     public function store(Request $request)
     {
-        
         $data = $request->all();
         $this->validateData($request);
-        
-        
+    
         $post =new Navbar();
         $post->name=$data['name'];
         $post->url=$data['url'];
@@ -65,7 +63,6 @@ class NavbarController extends Controller
     // Validate Data
     protected function validateData(Request $request)
     {
-        
         return $request->validate([
             'name'=>'required',
             'url'=>'required',

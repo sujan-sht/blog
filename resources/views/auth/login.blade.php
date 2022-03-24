@@ -11,6 +11,7 @@
 
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
+        @include('admin.includes.message')
 
         <form method="POST" action="{{ route('login') }}">
             @csrf
@@ -51,6 +52,10 @@
                     {{ __('Log in') }}
                 </x-button>
             </div>
+            <a href="{{route('facebookLogin')}}"><i class="fa fa-facebook-square"></i></a>
+            <a href="{{route('githubLogin')}}"><i class="fa fa-github"></i></a>
+            <a href="{{route('googleLogin')}}"><i class="fa fa-google-plus"></i></a>
+
         </form>
     </x-auth-card>
 </x-guest-layout>
