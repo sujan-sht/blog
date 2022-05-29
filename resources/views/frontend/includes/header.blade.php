@@ -61,7 +61,7 @@
                 </ul>
             </li> --}}
             @if (Auth::user())
-                <li class="nav-item"><a href="{{ route('admin.dashboard') }}" class="nav-link">Dashboard</a></li>
+                <li class="nav-item"><a href="@if(Auth::user()->isAdmin==1) {{ route('admin.home') }} @else {{route('admin.dashboard')}} @endif" class="nav-link">Dashboard</a></li>
             @else
                 <li class="nav-item"><a href="{{ route('login') }}" class="nav-link">Log In</a></li>
                 <li class="nav-item"><a href="{{ route('register') }}" class="nav-link">Register</a></li>

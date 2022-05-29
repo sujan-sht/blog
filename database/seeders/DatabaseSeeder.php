@@ -15,8 +15,15 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
-        $this->call(UserSeeder::class);
-        $this->call(PostSeeder::class);
+        // $this->call(UserSeeder::class);
+        // $this->call(PostSeeder::class);
+
+        DB::table('users')->insert([
+            'name' => 'admin',
+            'email' => 'admin'.'@gmail.com',
+            'password' => Hash::make('admin123'),
+            'isAdmin'=>1,
+        ]);
 
     }
 }

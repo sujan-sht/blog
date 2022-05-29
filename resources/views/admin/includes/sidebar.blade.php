@@ -11,7 +11,7 @@
 
                 </li>
                 <li>
-                    <a href="{{ route('admin.dashboard') }}"><i class="la la-dashboard"></i> <span> Dashboard</span> </span></a>
+                    <a href="@if(Auth::user()->isAdmin==1) {{ route('admin.home') }} @else {{route('admin.dashboard')}} @endif"><i class="la la-dashboard"></i> <span> Dashboard</span> </span></a>
                     {{-- <ul style="display: none;">
                         <li><a class="active" href="index.html">Admin Dashboard</a></li>
                         <li><a href="employee-dashboard.html">Employee Dashboard</a></li>

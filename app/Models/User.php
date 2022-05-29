@@ -28,7 +28,8 @@ class User extends Authenticatable
         'password',
         'new_password',
         'confirm_password',
-        'image'
+        'image',
+        'isAdmin'
     ];
 
     /**

@@ -121,7 +121,7 @@
                     @endif
                   </div>
                   @if ($comment->replies->count()>0)
-                      @foreach ($replies as $reply)
+                      @foreach ($comment->replies as $reply)
                       <div class="card comment-card">
                         <div class="card-body">
                           <div class="author-date">
@@ -136,8 +136,7 @@
                             </div>
                           </div>
                           <div class="comment-text mt-2">
-                            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eos quos optio
-                              ab numquam excepturi commodi nam omnis eaque, culpa earum!</p>
+                            <p>{{$reply->reply}}</p>
                           </div>
                         </div>
                       </div>

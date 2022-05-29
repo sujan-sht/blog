@@ -31,8 +31,19 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
-
-        return redirect()->intended(RouteServiceProvider::HOME);
+        if(auth()->attempt(array('email' => $request['email'], 'password' => $request['password'])))
+        {
+            
+            if (auth()->user()->isAdmin == 1) {
+                return redirect()->route('admin.home');
+            }else{
+                return redirect()->route('admin.dashboard');
+            }
+        }else{
+            return redirect()->route('login')
+                ->with('error','Email-Address And Password Are Wrong.');
+        }
+        // return redirect()->intended(RouteServiceProvider::HOME);
     }
 
     /**

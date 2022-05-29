@@ -10,6 +10,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CommentReplyController;
 use App\Http\Controllers\FrontendSettingsController;
 use App\Http\Controllers\NavbarController;
+use App\Http\Controllers\HomeController;
 
 
 /*
@@ -35,12 +36,15 @@ Route::get('/post/comment/delete/{comment}', [CommentController::class,'delete']
 
 Route::post('/comment-reply/{comment}',[CommentReplyController::class,'store'])->name('reply.store');
 
+Route::get('/home', [HomeController::class, 'adminHome'])->name('admin.home')->middleware('isAdmin');
+
 
 Route::group(['middleware' => ['auth']],function(){
-    Route::get('/dashboard', function () {
-        return view('admin.dashboard');
-    })->name('admin.dashboard');
-
+    // Route::get('/dashboard', function () {
+    //     return view('admin.dashboard');
+    // })->name('admin.dashboard');
+    Route::get('/dashboard', [HomeController::class, 'index'])->name('admin.dashboard');
+    
     //Profile controller
     Route::get('/profile',function(){
         return view('admin.profile.profile');

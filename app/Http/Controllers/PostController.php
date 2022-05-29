@@ -18,8 +18,12 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::with('category')->where('user_id',Auth::user()->id)->latest()->paginate(5);
-        
+        if(Auth::user()->isAdmin==1){
+            $posts = Post::with('category')->latest()->paginate(5);
+        }
+        else{
+            $posts = Post::with('category')->where('user_id',Auth::user()->id)->latest()->paginate(5);
+        }
         return view('admin.post.index',compact('posts'))->with('count',1);
          
     }
