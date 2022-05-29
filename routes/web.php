@@ -23,7 +23,16 @@ use App\Http\Controllers\HomeController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+use Laravel\Socialite\Facades\Socialite;
 
+Route::get('/auth/redirect',[SocialiteController::class,'githubRedirect'])->name('githubLogin');
+Route::get('/auth/callback',[SocialiteController::class,'callback']);
+
+Route::get('/auth/google/redirect',[SocialiteController::class,'googleRedirect'])->name('googleLogin');
+Route::get('/auth/google/callback',[SocialiteController::class,'googleCallback']);
+
+Route::get('/auth/facebook/redirect',[SocialiteController::class,'facebookRedirect'])->name('facebookLogin');
+Route::get('/auth/facebook/callback',[SocialiteController::class,'facebookCallback']);
 
 
 Route::get('/',[PagesController::class,'index'])->name('frontend.index');

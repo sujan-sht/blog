@@ -83,7 +83,15 @@
                   <div class="card-body">
                     <div class="author-date">
                       <div class="author">
-                        <img src="{{asset('/image/profileImage/'.$comment->user->image)}}" alt="" class="rounded-circle" />
+                        @if (!empty($comment->user->image))
+                          @if (file_exists('image/profileImage/'.$comment->user->image))
+                            <img src="{{asset('image/profileImage/'.$comment->user->image)}}" alt="{{$comment->user->name}}" class="rounded-circle" />
+                          @else
+                            <img src="{{asset('placeholder-pp.jpg')}}" alt="{{$comment->user->name}}" class="rounded-circle" />
+                          @endif 
+                        @else
+                          <img src="{{asset('placeholder-pp.jpg')}}" alt="{{$comment->user->name}}" class="rounded-circle" />
+                        @endif
                       </div>
                       <div class="inner-author-date">
                         <div class="author">
@@ -110,6 +118,7 @@
                     <div class="collapse" id="reply">
                       <form action="{{route('reply.store', $comment->id)}}" method="post">  
                         @csrf
+                        <input type="hidden" value="{{$comment->id}}" name="commentId">
                         <div class="row">
                           <div class="col-12 mb-4">
                             <textarea name="reply" rows="2" class="form-control" placeholder="Reply"></textarea>
@@ -126,7 +135,15 @@
                         <div class="card-body">
                           <div class="author-date">
                             <div class="author">
-                              <img src="{{asset('/image/profileImage/'.$reply->user->image)}}" alt="" class="rounded-circle" />
+                              @if (!empty($reply->user->image))
+                                @if (file_exists('image/profileImage/'.$reply->user->image))
+                                  <img src="{{asset('/image/profileImage/'.$reply->user->image)}}" alt="" class="rounded-circle" />
+                                @else
+                                  <img src="{{asset('placeholder-pp.jpg')}}" alt="{{$reply->user->name}}" class="rounded-circle" />
+                                @endif
+                              @else
+                                <img src="{{asset('placeholder-pp.jpg')}}" alt="{{$reply->user->name}}" class="rounded-circle" />
+                              @endif
                             </div>
                             <div class="inner-author-date">
                               <div class="author">
